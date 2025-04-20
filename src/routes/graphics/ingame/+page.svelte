@@ -40,7 +40,7 @@
 
 	.drake-timer {
 		position: absolute;
-		right: 60px;
+		right: 20px;
 		top: 60px;
 	}
 
