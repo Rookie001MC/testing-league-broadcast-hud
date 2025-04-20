@@ -1,5 +1,6 @@
 <script>
     let { children} = $props()
+    import '$mainSrc/app.css';
 </script>
 <div id="graphics-container">
 {@render children()}
