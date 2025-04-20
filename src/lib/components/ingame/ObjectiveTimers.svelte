@@ -11,9 +11,16 @@
 
     // Define colors for each objective type
     const objectiveColors = {
-        'baron': '#a17c47', // Baron/Herald gold
-        'atakhan': '#7d5ca7', // Atakhan purple
-        'drake': '#3498db'   // Dragon blue
+        'baron': '#3a3171', // Baron/Herald purple-blue
+        'atakhan': '#7a2613', // Atakhan dark red
+        // Each drake should have their own color
+        'earth': '#a66206', // Mountain Dragon
+        'fire': '#ff8a00', // Inferno Dragon
+        'air': '82b0f2', // Cloud Dragon
+        'chemtech': '#75ce03', // Chemtech Dragon
+        'hextech': '#00cffd', // Hextech Dragon
+        'water': '00e9a3', // Ocean Dragon
+        'elder': '#75ce03', // Elder Dragon
     };
 
     // Backend URL for assets
@@ -24,14 +31,23 @@
 
 
     // Get the correct timer object based on the objective type
+    let drakeType = $state(null);
+    let color = $state(objectiveColors[objectiveType] || '#ffffff');
     $effect(() => {
         const propertyName = objectivePropertyMap[objectiveType];    
         timer = gameData?.[propertyName] || null;
-
+        // For the drake type, it's stored in this key:
+        // dragonPitTimer.subType: 'style/ingame/objectives/dragonpit/fire.png'
+        // We should get the 'fire.png' part
+        // So that we can compare the filename, truncate the png, then compare to the table above 
+        // to get the correct color
+        if (objectiveType === 'drake') {
+            drakeType = timer?.subType?.split('/').pop().split('.')[0] || null;
+            color = objectiveColors[drakeType] || '#ffffff';
+        }
     });
 
     // Computed values
-    let color = $derived(objectiveColors[objectiveType] || '#ffffff');
     let iconUrl = $derived(timer?.subType ? backendUrl + "cache/" + timer.subType : '');
     let isVisible = $derived(!!timer && timer?.timeLeft > 0);
     let formattedTime = $derived(timer?.timeLeft ? formatTime(timer.timeLeft) : '0:00');
@@ -48,9 +64,6 @@
 
 {#if isVisible}
 <div class="timer-container" style="background-color: {color}">
-    <div class="timer-text">
-        <span>{formattedTime}</span>
-    </div>
     <div class="timer-icon-container">
         <div class="icon-wrapper">
             {#if iconUrl}
@@ -71,6 +84,9 @@
             />
         </svg>
     </div>
+    <div class="timer-text">
+        <span>{formattedTime}</span>
+    </div>
 </div>
 {/if}
 
@@ -78,7 +94,7 @@
     .timer-container {
         display: flex;
         align-items: center;
-        border-radius: 8px;
+        border-radius: 40px;
         padding: 8px;
         width: fit-content;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -97,6 +113,8 @@
         position: relative;
         width: 40px;
         height: 40px;
+        flex: 1;
+        margin-right: 20px;
     }
     
     .icon-wrapper {
