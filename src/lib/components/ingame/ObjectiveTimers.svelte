@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	import type { ObjectiveTimer } from '$lib/types/Ingame/ObjectiveTypes';
+
 	const { gameData, objectiveType } = $props();
 
 	// Map objectiveType to the correct property in gameData
@@ -25,8 +27,9 @@
 	// Backend URL for assets
 	const backendUrl = 'http://localhost:58869/';
 
-	let timer = $state(null);
-	let drakeType = $state(null);
+	let timer = $state<ObjectiveTimer | null>(null);
+	let drakeType = $state<keyof typeof objectiveColors | null>(null);
+	// @ts-ignore
 	let color = $state(objectiveColors[objectiveType] || '#ffffff');
 
 	$effect(() => {
@@ -35,8 +38,8 @@
 
 	$effect(() => {
 		if (objectiveType === 'drake') {
-			drakeType = timer?.subType?.split('/').pop().split('.')[0] || null;
-			color = objectiveColors[drakeType] || '#ffffff';
+			drakeType = (timer?.subType?.split('/').pop().split('.')[0] as keyof typeof objectiveColors) || null;
+			color = objectiveColors[drakeType as keyof typeof objectiveColors] || '#ffffff';
 		}
 	});
 
