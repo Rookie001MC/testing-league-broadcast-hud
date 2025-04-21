@@ -40,13 +40,23 @@
 		}
 	});
 
+
 	// Computed values
 	let iconUrl = $derived(timer?.subType ? backendUrl + 'cache/' + timer.subType : '');
 	let isVisible = $derived(!!timer && timer?.timeLeft > 0);
-	let formattedTime = $derived(timer?.timeLeft ? formatTime(timer.timeLeft) : '0:00');
+	let formattedTime = $derived('0:00');
 	let progressPercent = $derived(
 		timer?.timeLeft && timer?.timeTotal ? 1 - timer.timeLeft / timer.timeTotal : 0
 	);
+
+	$effect(() => {
+		if (timer?.timeLeft < 0.2 && timer?.timeLeft > 0) {
+			formattedTime = 'LIVE';
+		} else {
+			formattedTime = formatTime(timer?.timeLeft || 0);
+		}
+	});
+
 
 	// Helper function to format time as MM:SS
 	function formatTime(seconds) {
@@ -55,6 +65,7 @@
 		const secs = Math.floor(seconds % 60);
 		return `${mins}:${secs.toString().padStart(2, '0')}`;
 	}
+
 </script>
 
 {#if isVisible}
@@ -80,7 +91,9 @@
 			</svg>
 		</div>
 		<div class="timer-text">
-			<span>{formattedTime}</span>
+			{#if formattedTime}
+				<span>{formattedTime}</span>
+			{/if}
 		</div>
 	</div>
 {/if}
