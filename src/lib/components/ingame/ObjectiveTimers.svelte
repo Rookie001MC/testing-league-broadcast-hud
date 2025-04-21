@@ -72,7 +72,7 @@
 					r="18"
 					fill="transparent"
 					stroke="white"
-					stroke-width="2"
+					stroke-width="4.1"
 					stroke-dasharray={2 * Math.PI * 18}
 					stroke-dashoffset={2 * Math.PI * 18 * progressPercent}
 					transform="rotate(-90, 20, 20)"
@@ -100,11 +100,11 @@
 	.timer-text {
 		color: white;
 		text-align: left;
-		font-size: 18px;
+		font-size: 19px;
 		margin-top: 4px;
 		font-weight: bold;
 		margin-right: 10px;
-		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+		text-shadow: 0 0 10px #fff;
 		font-family: 'VNG Beatrice', 'Segoe UI', 'Arial', sans-serif;
 	}
 
@@ -137,5 +137,6 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		filter: drop-shadow(0 0 10px #fff);
 	}
 </style>
