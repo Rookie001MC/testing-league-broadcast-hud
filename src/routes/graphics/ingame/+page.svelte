@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
 	import ObjectiveTimers from '$lib/components/ingame/ObjectiveTimers.svelte';
+	import type { IngameState } from '$lib/types/Ingame/IngameState';
 
 	let data = new WebSocket('ws://localhost:58869/ws/in');
 
-	let gameData;
+	let gameData: IngameState;
 	data.onmessage = (event) => {
 		// jsonify message, ignore if not valid JSON for messages like KeepAlive
 		try {
