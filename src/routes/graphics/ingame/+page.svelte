@@ -1,36 +1,40 @@
 <script lang="ts">
 	import ObjectiveTimers from '$lib/components/ingame/ObjectiveTimers.svelte';
-	import type { IngameState } from '$lib/types/Ingame/IngameState';
+	import TopBar from '$lib/components/ingame/TopBar.svelte';
+	import type { GameState } from '$lib/types/Ingame/Message';
+	import { onMount } from 'svelte';
 
-	let data = new WebSocket('ws://localhost:58869/ws/in');
+	let gameData: GameState | null = null;
 
-	let gameData: IngameState;
-	data.onmessage = (event) => {
-		// jsonify message, ignore if not valid JSON for messages like KeepAlive
-		try {
-			const parsedData = JSON.parse(event.data);
-			if (parsedData.type === 'ingame-state-update') {
-				gameData = parsedData.state;
+	onMount(() => {
+		const ws = new WebSocket('ws://localhost:58869/ws/in');
+		ws.onmessage = (event) => {
+			try {
+				const parsed = JSON.parse(event.data);
+				if (parsed.type === 'ingame-state-update') {
+					gameData = parsed.state;
+				}
+			} catch {
+				console.log('Received invalid JSON, likely KeepAlive:', event.data);
 			}
-		} catch (e) {
-			console.log('Received invalid JSON, likely KeepAlive: ', event.data);
-		}
-	};
+		};
+	});
+
 </script>
 
-<div class="baron-timer">
-	<ObjectiveTimers {gameData} objectiveType="baron" />
-</div>
-<div class="drake-timer">
-	<ObjectiveTimers {gameData} objectiveType="drake" />
-</div>
-<div class="atakhan-timer">
-	<ObjectiveTimers {gameData} objectiveType="atakhan" />
-</div>
+{#if gameData}
+	<div class="baron-timer">
+		<ObjectiveTimers {gameData} objectiveType="baron" />
+	</div>
+	<div class="drake-timer">
+		<ObjectiveTimers {gameData} objectiveType="drake" />
+	</div>
+	<div class="atakhan-timer">
+		<ObjectiveTimers {gameData} objectiveType="atakhan" />
+	</div>
+	<TopBar {gameData} />
+{/if}
 
-<div id="top-row">
-	<!-- Includes: Top Bar for Scoreboard, including: total kills, total team gold, total towers destroyed, ....-->
-</div>
 
 <style>
 	.baron-timer {
