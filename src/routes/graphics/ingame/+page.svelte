@@ -7,7 +7,8 @@
 	let gameData: GameState | null = null;
 
 	onMount(() => {
-		const ws = new WebSocket('ws://localhost:58869/ws/in');
+		// const ws = new WebSocket('ws://192.168.30.14:58869/ws/in');
+		 const ws = new WebSocket('ws://localhost:58869/ws/in');
 		ws.onmessage = (event) => {
 			try {
 				const parsed = JSON.parse(event.data);
