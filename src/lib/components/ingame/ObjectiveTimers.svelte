@@ -121,7 +121,7 @@
 		font-weight: bold;
 		margin-right: 10px;
 		text-shadow: 0 0 10px #fff;
-		font-family: 'VNG Beatrice', 'Segoe UI', 'Arial', sans-serif;
+		font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
 	}
 
 	.timer-icon-container {

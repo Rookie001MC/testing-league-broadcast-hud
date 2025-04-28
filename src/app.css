@@ -1,28 +1,28 @@
 @font-face {
-    font-family: "VNG Beatrice";
-    src: url("/fonts/VNG_Beatrice_Medium.ttf");
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-Medium.ttf");
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "VNG Beatrice";
-    src: url("/fonts/VNG_Beatrice_MediumItalic.ttf");
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-MediumItalic.ttf");
     font-weight: 600;
     font-style: italic;
 }
 
 @font-face {
-    font-family: "VNG Beatrice";
-    src: url("/fonts/VNG_Beatrice_Bold.ttf");
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-Bold.ttf");
     font-weight: 600;
     font-style: normal;
 }
 
 
 @font-face {
-    font-family: "VNG Beatrice";
-    src: url("/fonts/VNG_Beatrice_BoldItalic.ttf");
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-BoldItalic.ttf");
     font-weight: 600;
     font-style: italic;
 }

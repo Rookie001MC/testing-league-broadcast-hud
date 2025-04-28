@@ -136,7 +136,7 @@
 
 	.team-container {
 		color: #fff;
-		font-family: 'VNG Beatrice', 'Segoe UI', 'Arial', sans-serif;
+		font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
 		display: flex;
 		height: 100%;
 		margin: 0 60px;
