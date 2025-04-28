@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { ObjectiveTimer } from '$lib/types/Ingame/ObjectiveTypes';
+	import { formatTime } from '$lib/utils/formatTime';
 
 	const { gameData, objectiveType } = $props();
+
 
 	// Map objectiveType to the correct property in gameData
 	const objectivePropertyMap = {
@@ -60,15 +62,6 @@
 		}
 	});
 
-
-	// Helper function to format time as MM:SS
-	function formatTime(seconds) {
-		if (!seconds && seconds !== 0) return '0:00';
-		const mins = Math.floor(seconds / 60);
-		const secs = Math.floor(seconds % 60);
-		return `${mins}:${secs.toString().padStart(2, '0')}`;
-	}
-
 </script>
 
 {#if isVisible}
@@ -117,7 +110,7 @@
 		color: white;
 		text-align: left;
 		font-size: 19px;
-		margin-top: 4px;
+		Roboto: 4px;
 		font-weight: bold;
 		margin-right: 10px;
 		text-shadow: 0 0 10px #fff;

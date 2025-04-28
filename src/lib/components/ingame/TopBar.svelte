@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GameState } from '$lib/types/Ingame/Message';
 	import type { Scoreboard } from '$lib/types/Ingame/ScoreboardTypes';
+	import { formatTime } from '$lib/utils/formatTime';
 
 	const { gameData }: { gameData: GameState | null } = $props();
 
@@ -108,7 +109,11 @@
 				</div>
 			</div>
 		</div>
-		<div id="toplowerbar-background"></div>
+		<div id="toplowerbar-background">
+			<div class="toplowerbar-timer">
+				{formatTime(gameData?.gameTime || 0)}
+			</div>
+		</div>
 	</div>
 {/if}
 
@@ -231,9 +236,14 @@
 	}
 
 	#toplowerbar-background {
-		width: 200px;
-		height: 60px;
+		width: 620px;
+		height: 30px;
 		background-color: #1f0210;
+		position: relative;
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	
 	.team-kills {
@@ -241,7 +251,6 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		margin-top: 8px;
 		font-size: 48px;
 	}
 
@@ -259,5 +268,11 @@
 		justify-content: center;
 		align-items: center;
 		height: 140px;
+	}
+
+	.toplowerbar-timer {
+		color: #fff;
+		font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		font-size: 20px;
 	}
 </style>
