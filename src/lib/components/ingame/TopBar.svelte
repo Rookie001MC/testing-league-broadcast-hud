@@ -2,7 +2,7 @@
 	import type { GameState } from '$lib/types/Ingame/Message';
 	import type { Scoreboard } from '$lib/types/Ingame/ScoreboardTypes';
 	import { formatTime } from '$lib/utils/formatTime';
-
+	import { PUBLIC_LEAGUE_BROADCAST_SERVER } from '$env/static/public';
 	const { gameData }: { gameData: GameState | null } = $props();
 
 	const topScoreboardData: Scoreboard = gameData?.scoreboard ?? {
@@ -70,7 +70,7 @@
 			</div>
 			<div class="tournament-logo">
 				<img
-					src="http://localhost:58869/cache/style/mainIcon.png"
+					src={`http://${PUBLIC_LEAGUE_BROADCAST_SERVER}/cache/style/mainIcon.png`}
 					alt="tournament logo"
 					width="60"
 					height="60"
@@ -123,7 +123,7 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translateX(-51.5%);
 		height: 75px;
 		width: 1110px;
 		background: linear-gradient(

@@ -3,12 +3,12 @@
 	import TopBar from '$lib/components/ingame/TopBar.svelte';
 	import type { GameState } from '$lib/types/Ingame/Message';
 	import { onMount } from 'svelte';
-
+	import { PUBLIC_LEAGUE_BROADCAST_SERVER} from '$env/static/public';
 	let gameData: GameState | null = null;
 
 	onMount(() => {
 		// const ws = new WebSocket('ws://192.168.30.14:58869/ws/in');
-		 const ws = new WebSocket('ws://localhost:58869/ws/in');
+		const ws = new WebSocket(`ws://${PUBLIC_LEAGUE_BROADCAST_SERVER}/ws/in`);
 		ws.onmessage = (event) => {
 			try {
 				const parsed = JSON.parse(event.data);

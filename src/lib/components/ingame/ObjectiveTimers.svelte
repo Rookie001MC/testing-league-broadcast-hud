@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ObjectiveTimer } from '$lib/types/Ingame/ObjectiveTypes';
 	import { formatTime } from '$lib/utils/formatTime';
+	import { PUBLIC_LEAGUE_BROADCAST_SERVER } from '$env/static/public';
 
 	const { gameData, objectiveType } = $props();
 
@@ -27,7 +28,7 @@
 	};
 
 	// Backend URL for assets
-	const backendUrl = 'http://localhost:58869/';
+	const backendUrl = `http://${PUBLIC_LEAGUE_BROADCAST_SERVER}/`;
 
 	let timer = $state<ObjectiveTimer | null>(null);
 	let drakeType = $state<keyof typeof objectiveColors | null>(null);
